@@ -1,0 +1,5 @@
+(library
+ (public_name ezrest)
+ (preprocess
+  (pps lwt_ppx))
+ (libraries eglib cohttp-lwt-unix))

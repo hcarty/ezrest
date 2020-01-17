@@ -1,0 +1,9 @@
+(alias
+  (name runtest)
+  (deps
+   (:md README.md)
+   (package ezrest))
+  (action
+   (progn
+    (run ocaml-mdx test --direction=to-md %{md})
+    (diff? %{md} %{md}.corrected))))

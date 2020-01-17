@@ -1,0 +1,20 @@
+opam-version: "2.0"
+maintainer: "Hezekiah M. Carty <hez@0ok.org>"
+authors: [ "Hezekiah M. Carty <hez@0ok.org>" ]
+license: "Apache-2.0"
+homepage: "https://github.com/hcarty/ezrest"
+dev-repo: "git+https://github.com/hcarty/ezrest.git"
+bug-reports: "https://github.com/hcarty/ezrest"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "ocaml" {>= "4.07.0"}
+  "cohttp-lwt-unix" {>= "0.99.0"}
+  "fmt"
+  "lwt"
+  "lwt_ppx"
+  "rresult"
+  "dune" {>= "1.8.0"}
+]
+synopsis: "Very simple wrapper on top of the cohttp-lwt client module"
