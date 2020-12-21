@@ -196,6 +196,15 @@ module type S = sig
     params:(string * string list) list ->
     Uri.t ->
     response result Lwt.t
+
+  val call :
+    ?ctx:Cohttp_lwt_unix.Client.ctx ->
+    ?headers:Cohttp.Header.t ->
+    ?timeout:float ->
+    ?body:Cohttp_lwt.Body.t ->
+    Cohttp.Code.meth ->
+    Uri.t ->
+    response result Lwt.t
 end
 
 module Make (Response : Response) : S with type response = Response.response =
@@ -296,6 +305,18 @@ struct
   let post_form ?ctx ?headers ?timeout ~params uri =
     let headers = always_close headers in
     wrap_unix_error ~timeout (post_form ?ctx ~headers ~params) uri
+
+  let call ?ctx ?headers ?body meth uri =
+    let%lwt (response, body) = C.call ?ctx ?headers ?body meth uri in
+    match Cohttp.Response.(response.status) with
+    | #Cohttp.Code.success_status -> Response.make response body
+    | status ->
+      let%lwt body = Cohttp_lwt.Body.to_string body in
+      error_lwt (Unhandled_response_code { uri; status; body })
+
+  let call ?ctx ?headers ?timeout ?body meth uri =
+    let headers = always_close headers in
+    wrap_unix_error ~timeout (call ?ctx ~headers ?body meth) uri
 end
 
 module String_response_body = Make (String_t_response)

@@ -123,6 +123,21 @@ module type S = sig
 
       @param params specifies a list of [(key, value)] pairs which represent the
       form elements to send. *)
+
+  val call :
+    ?ctx:Cohttp_lwt_unix.Client.ctx ->
+    ?headers:Cohttp.Header.t ->
+    ?timeout:float ->
+    ?body:Cohttp_lwt.Body.t ->
+    Cohttp.Code.meth ->
+    Uri.t ->
+    response result Lwt.t
+  (** [call ?ctx ?headers ?timeout ?body meth uri] makes a [meth] call to [uri].
+      It is a more generic version of the other functions in this module. The
+      more specific functions like {!get} and {!post} should be used when
+      possible.
+
+      @param body is the request body to send. There is no body by default. *)
 end
 
 module String_response_body : S with type response = string t
