@@ -24,7 +24,7 @@ Now we can `GET` some content, failing if the site tries to redirect us.
 # Ezrest.get ~follow:0 site
 - : string Ezrest.result =
 Ok
- "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\" />\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/0.5.0/modern-normalize.min.css\" />\n<link rel=\"stylesheet\""... (* string length 7323; truncated *)
+ "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\" />\n<link rel=\"stylesheet\" href=\"/style.css\" />\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism-tom"... (* string length 6949; truncated *)
 ```
 
 We can `PUT` and `POST` too!
