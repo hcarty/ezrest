@@ -16,8 +16,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
         ocaml-version:
-          - 4.10.0 
-          - 4.09.0
+          - 4.11.1
           - 4.08.1
 
     runs-on: ${{ matrix.os }}
@@ -27,7 +26,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Use OCaml ${{ matrix.ocaml-version }}
-        uses: avsm/setup-ocaml@v1.0.1
+        uses: avsm/setup-ocaml@v1
         with:
           ocaml-version: ${{ matrix.ocaml-version }}
 
